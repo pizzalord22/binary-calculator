@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Binary calculator</title>
+</head>
+<body>
+<form>
+    <input title="binary" id="binary" name="binary" oninput="calculate1()" placeholder="binary" type="number">
+    <input title="decimal" id="decimal" name="decimal" oninput="calculate2()" placeholder="decimal" type="number">
+</form>
+<div id="output"></div>
+<script>
+    document.getElementById("binary").oninput = function() {calculate("binary")};
+    document.getElementById("decimal").oninput = function() {calculate("decimal")};
+    var display = document.getElementById("output");
+    function calculate(type) {
+        var output = [];
+        if(type === "decimal"){
+            var input = document.getElementById('decimal').value;
+            var temp;
+            while(input > 0){
+                temp =  Math.floor(input / 2);
+                output.unshift(input - temp * 2);
+                input = temp;
+            }
+            display.innerHTML = output.toString();
+        }
+    }
+</script>
+</body>
+</html>
