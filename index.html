@@ -6,25 +6,46 @@
 </head>
 <body>
 <form>
-    <input title="binary" id="binary" name="binary" oninput="calculate1()" placeholder="binary" type="number">
-    <input title="decimal" id="decimal" name="decimal" oninput="calculate2()" placeholder="decimal" type="number">
+    <input title="binary" id="binary" name="binary" placeholder="binary" type="number">
+    <input title="decimal" id="decimal" name="decimal" placeholder="decimal" type="number">
 </form>
 <div id="output"></div>
 <script>
-    document.getElementById("binary").oninput = function() {calculate("binary")};
-    document.getElementById("decimal").oninput = function() {calculate("decimal")};
+    document.getElementById("binary").oninput = function () {
+        calculate("binary")
+    };
+    document.getElementById("decimal").oninput = function () {
+        calculate("decimal")
+    };
     var display = document.getElementById("output");
     function calculate(type) {
-        var output = [];
-        if(type === "decimal"){
-            var input = document.getElementById('decimal').value;
-            var temp;
-            while(input > 0){
-                temp =  Math.floor(input / 2);
-                output.unshift(input - temp * 2);
+        var output = 0;
+        var outputd = [];
+        var input;
+        var tempb = [];
+        var temp = 0;
+        if (type === "decimal") {
+            input = document.getElementById('decimal').value;
+            while (input > 0) {
+                temp = Math.floor(input / 2);
+                outputd.unshift(input - temp * 2);
                 input = temp;
             }
-            display.innerHTML = output.toString();
+            display.innerHTML = "binary: " + outputd.toString();
+        }
+        if (type === "binary") {
+            input = document.getElementById('binary').value;
+            for (var i = 0; i < input.length; i++) {
+                tempb.unshift(input[i]);
+            }
+            for (var k = 0; k < tempb.length; k++) {
+                if(k == 0  && tempb[k] == 0){
+
+                }else{
+                    output = output + Math.pow(tempb[k] * 2, k);
+                }
+            }
+            display.innerHTML = "decimal: " + output.toString();
         }
     }
 </script>
